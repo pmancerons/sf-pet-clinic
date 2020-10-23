@@ -19,7 +19,7 @@
 
     <groupId>curso.springframework</groupId>
     <artifactId>sf-pet-clinic</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>sf-pet-clinic</name>
     <description>Demo project for Spring Boot</description>
 
@@ -47,6 +47,6 @@
         <developerConnection>
             scm:git:https://github.com/pmancerons/sf-pet-clinic.git
         </developerConnection>
-      <tag>0.02</tag>
+      <tag>HEAD</tag>
   </scm>
 </project>

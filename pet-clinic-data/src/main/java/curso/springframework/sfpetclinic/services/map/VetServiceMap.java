@@ -2,10 +2,11 @@ package curso.springframework.sfpetclinic.services.map;
 
 import curso.springframework.sfpetclinic.model.Vet;
 import curso.springframework.sfpetclinic.services.CrudService;
+import curso.springframework.sfpetclinic.services.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
         return super.findAll();

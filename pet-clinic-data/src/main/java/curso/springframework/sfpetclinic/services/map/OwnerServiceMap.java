@@ -4,6 +4,7 @@ import curso.springframework.sfpetclinic.model.Owner;
 import curso.springframework.sfpetclinic.services.OwnerService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Service
@@ -21,7 +22,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Owner save(Owner owner) {
-        return super.save(owner.getId(), owner);
+        return super.save(owner);
     }
 
     @Override
@@ -38,4 +39,5 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     public Owner findByLastName(String lastName) {
         return null;
     }
+
 }

@@ -1,7 +1,9 @@
 package curso.springframework.sfpetclinic.services.map;
 
+import curso.springframework.sfpetclinic.model.Specialty;
 import curso.springframework.sfpetclinic.model.Vet;
 import curso.springframework.sfpetclinic.services.CrudService;
+import curso.springframework.sfpetclinic.services.SpecialtyService;
 import curso.springframework.sfpetclinic.services.VetService;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,13 @@ import java.util.Set;
 
 @Service
 public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+
+    private final SpecialtyService specialtyService;
+
+    public VetServiceMap(SpecialtyService specialtyService) {
+        this.specialtyService = specialtyService;
+    }
+
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
@@ -21,6 +30,18 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet save(Vet vet) {
+        if(vet.getSpecialties().size() > 0){
+            vet.getSpecialties().forEach( specialty -> {
+                if(specialty != null){
+                    if(specialty.getId() == null){
+                        Specialty savedSpecialty = specialtyService.save(specialty);
+                        specialty.setId(savedSpecialty.getId());
+                    }
+                }else{
+                    throw new RuntimeException("specialty in vet can not be null");
+                }
+            });
+        }
         return super.save(vet);
     }
 

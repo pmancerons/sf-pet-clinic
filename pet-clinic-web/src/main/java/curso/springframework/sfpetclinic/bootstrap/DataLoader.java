@@ -15,13 +15,15 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final PetService petService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, PetService petService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, PetService petService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.petService = petService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -36,12 +38,12 @@ public class DataLoader implements CommandLineRunner {
         PetType savedDogPetType = petTypeService.save(dog);
 
         PetType cat = new PetType();
-        dog.setPetName("Cat");
+        cat.setPetName("Cat");
 
         PetType savedCatPetType = petTypeService.save(cat);
 
         PetType bird = new PetType();
-        dog.setPetName("Bird");
+        bird.setPetName("Bird");
 
         PetType savedBirdPetType = petTypeService.save(bird);
 
@@ -89,12 +91,14 @@ public class DataLoader implements CommandLineRunner {
         Specialty surgery = new Specialty();
         surgery.setDescription("Surgery");
 
-        Specialty surgerySaved = specialtyService.save(radiology);
+        Specialty surgerySaved = specialtyService.save(surgery);
+
+        specialtyService.findAll().forEach(System.out::println);
 
         Specialty dentistry = new Specialty();
         dentistry.setDescription("Dentistry");
 
-        Specialty dentistrySaved = specialtyService.save(radiology);
+        Specialty dentistrySaved = specialtyService.save(dentistry);
 
         Vet vet1 = new Vet();
         vet1.setFirstName("vete");
@@ -113,5 +117,12 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(vet2);
 
         System.out.println("vet created");
+
+        Visit visitMariasCat = new Visit();
+        visitMariasCat.setDescription("visit from maria to her cat for dental");
+        visitMariasCat.setDate(LocalDate.now());
+        visitMariasCat.setPet(mariasCat);
+
+        visitService.save(visitMariasCat);
     }
 }

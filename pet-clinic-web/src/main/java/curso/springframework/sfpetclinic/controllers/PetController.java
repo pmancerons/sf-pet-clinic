@@ -89,9 +89,8 @@ public class PetController {
             }
         }
         if (!StringUtils.hasLength(pet.getName())) {
-            result.rejectValue("name", "null", "name of pet cannot be empty");
+//            result.rejectValue("name", "null", "name of pet cannot be empty");
         }
-        pet.setOwner(owner);
         if (result.hasErrors()) {
             model.addAttribute("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
